@@ -67,8 +67,9 @@ void releaseXML(struct TestData *td) {
     xmlCleanupParser();
 }
 
-void parseXML(struct TestData *td, unsigned long iter) {
+void* parseXML(struct TestData *td, unsigned long iter) {
     xmlSAXUserParseMemory(&handler,NULL,td->xml,td->xmllen);
+    return NULL;
 }
 
 int main(int argc, char *argv[]) {

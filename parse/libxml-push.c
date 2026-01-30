@@ -16,7 +16,7 @@ void releaseXML(struct TestData *td) {
     xmlCleanupParser();
 }
 
-void parseXML(struct TestData *td, unsigned long iter) {
+void* parseXML(struct TestData *td, unsigned long iter) {
     xmlParserCtxtPtr ctx;
     xmlChar *mem;
     int memsize;
@@ -31,6 +31,7 @@ void parseXML(struct TestData *td, unsigned long iter) {
     
     xmlFreeDoc(ctx->myDoc);
     xmlFreeParserCtxt(ctx);
+    return NULL;
 }
 
 int main(int argc, char *argv[]) {
