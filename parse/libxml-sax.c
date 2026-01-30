@@ -61,6 +61,8 @@ xmlSAXHandler handler = {
 };
 
 void initXML(struct TestData *td) {
+    xmlInitParser();
+    (void)td;  // 未使用的参数
 }
 
 void releaseXML(struct TestData *td) {
