@@ -70,7 +70,20 @@ void releaseXML(struct TestData *td) {
 }
 
 void* parseXML(struct TestData *td, unsigned long iter) {
-    xmlSAXUserParseMemory(&handler,NULL,td->xml,td->xmllen);
+    xmlParserCtxtPtr ctxt;
+    (void)iter;  // 未使用的参数
+    
+    // 使用 xmlCreatePushParserCtxt 和 xmlParseChunk 代替 xmlSAXUserParseMemory
+    // xmlSAXUserParseMemory 在某些版本中可能有问题，改用更稳定的 API
+    ctxt = xmlCreatePushParserCtxt(&handler, NULL, NULL, 0, NULL);
+    if (ctxt == NULL) {
+        return NULL;
+    }
+    
+    // 分块解析 XML 数据
+    xmlParseChunk(ctxt, (const char*)td->xml, td->xmllen, 1);  // 1 表示最后一块
+    xmlFreeParserCtxt(ctxt);
+    
     return NULL;
 }
 
