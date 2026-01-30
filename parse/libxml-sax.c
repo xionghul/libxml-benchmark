@@ -72,6 +72,13 @@ void* parseXML(struct TestData *td, unsigned long iter) {
     return NULL;
 }
 
+// SAX 解析器不需要实现 saveXML（流式解析，不保存文档）
+void saveXML(struct TestData *td, void* doc) {
+    (void)td;
+    (void)doc;
+    // SAX 解析器不保存文档，此函数为空实现
+}
+
 int main(int argc, char *argv[]) {
     return Test(argc,argv);
 }
